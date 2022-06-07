@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(classes = GorestApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ManualMockingIntegrationTest {
 
-    @Value("classpath:mock_user.json")
+    @Value("classpath:/response/mock_user.json")
     private Resource mockUserJsonFile;
 
     @Autowired

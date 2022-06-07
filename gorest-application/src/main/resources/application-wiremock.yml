@@ -1,0 +1,2 @@
+gorest:
+  baseUrl: "http://localhost:8089"

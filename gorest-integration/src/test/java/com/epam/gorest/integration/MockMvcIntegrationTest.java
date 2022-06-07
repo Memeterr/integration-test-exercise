@@ -29,7 +29,7 @@ public class MockMvcIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Value("classpath:mock_mvc_response.json")
+    @Value("classpath:/response/mock_mvc_response.json")
     private Resource mockUserJsonFile;
 
     @Autowired
@@ -41,7 +41,7 @@ public class MockMvcIntegrationTest {
     public static void init() {
         wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig()
                 .port(8089)
-                .withRootDirectory("src/test/resources"));
+                .withRootDirectory("src/test/resources/wiremock"));
 
         WireMock.configureFor(8089);
         wireMockServer.start();
@@ -60,6 +60,8 @@ public class MockMvcIntegrationTest {
                 .willReturn(ok()
                         .withHeader("Content-Type", "application/json")
                         .withBodyFile("gorest_mock_response.json")));
+
+        System.out.println(new String(fileReader.readFileToBytes(mockUserJsonFile)));
 
         // WHEN
         mockMvc.perform(MockMvcRequestBuilders.get("/api/user"))
